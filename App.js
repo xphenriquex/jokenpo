@@ -77,7 +77,7 @@ export default class app3 extends Component {
 
   render () {
     return(
-      <View>
+      <View style={ styles.corpo }>
         
         <Topo></Topo>
 
@@ -138,5 +138,9 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontWeight: 'bold',
     color: 'red'
+  },
+  corpo: {
+    backgroundColor: '#fff', 
+    flex: 1
   }
 });
