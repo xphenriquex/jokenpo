@@ -1,5 +1,14 @@
 import React, {Component} from 'react';
-import { View, Text, Button, Image, StyleSheet } from 'react-native';  
+import Topo from './src/components/Topo';
+import Icone from './src/components/Icone';
+
+import { 
+  View, 
+  Text, 
+  Button, 
+  StyleSheet,
+  ScrollView
+} from 'react-native';  
 
 export default class app3 extends Component {
 
@@ -14,10 +23,12 @@ export default class app3 extends Component {
     }
 
   jokenpo(escolhaUsuario){
-    //gera numero aleatorio (0, 1, 2)
-
-    let numAleatorio = Math.floor(Math.random() * 3);
+    
     let escolhaComputador = '';
+
+    //gera numero aleatorio (0, 1, 2)
+    let numAleatorio = Math.floor(Math.random() * 3);
+    
 
     switch(numAleatorio){
       case 0: escolhaComputador = 'pedra'; break;
@@ -31,42 +42,42 @@ export default class app3 extends Component {
         }
 
         if(escolhaUsuario == 'papel'){
-          resultado = 'Usuário ganhou';
+          resultado = 'Você ganhou';
         }
 
         if(escolhaUsuario == 'tesoura'){
-          resultado = 'Computador ganhou';
+          resultado = 'Você perder';
       }
     }
 
 
-  if(escolhaComputador == 'papel'){
-      if(escolhaUsuario == 'papel'){
+    if(escolhaComputador == 'papel'){
+        if(escolhaUsuario == 'papel'){
+            resultado = 'Empate';
+        }
+
+        if(escolhaUsuario == 'tesoura'){
+          resultado = 'Você ganhou';
+        }
+
+        if(escolhaUsuario == 'pedra'){
+          resultado = 'Você perdeu';
+      }
+    }
+
+    if(escolhaComputador == 'tesoura'){
+      if(escolhaUsuario == 'tesoura'){
           resultado = 'Empate';
       }
 
-      if(escolhaUsuario == 'tesoura'){
-        resultado = 'Usuário ganhou';
+      if(escolhaUsuario == 'pedra'){
+        resultado = 'Você ganhou';
       }
 
-      if(escolhaUsuario == 'pedra'){
-        resultado = 'Computador ganhou';
+      if(escolhaUsuario == 'papel'){
+        resultado = 'Você perdeu';
     }
-  }
-
-  if(escolhaComputador == 'tesoura'){
-    if(escolhaUsuario == 'tesoura'){
-        resultado = 'Empate';
     }
-
-    if(escolhaUsuario == 'pedra'){
-      resultado = 'Usuário ganhou';
-    }
-
-    if(escolhaUsuario == 'papel'){
-      resultado = 'Computador ganhou';
-  }
-}
 
     this.setState({
         escolhaUsuario,
@@ -77,7 +88,7 @@ export default class app3 extends Component {
 
   render () {
     return(
-      <View style={ styles.corpo }>
+      <ScrollView style={ styles.corpo }>
         
         <Topo></Topo>
 
@@ -99,28 +110,18 @@ export default class app3 extends Component {
 
         <View style={styles.palco}>
           <Text style={styles.txtResultado}>{this.state.resultado}</Text>
-          <Text>Escolha do computador: {this.state.escolhaComputador} </Text>
-          <Image source={require('./imgs/tesoura.png')} />
           
-          <Text>Escolha do usuário: {this.state.escolhaUsuario}</Text>
-          <Image source={require('./imgs/tesoura.png')} />
+          <Icone escolha={this.state.escolhaComputador} jogador={'Computador'}></Icone>
+          <Icone escolha={this.state.escolhaUsuario} jogador={'Você'}></Icone> 
+
         </View>
 
-      </View>
+      </ScrollView>
     );
   }
 
 }
 
-class Topo  extends Component {
-  render(){
-    return (
-      <View>
-        <Image source={ require('./imgs/jokenpo.png') } />
-      </View>
-    );
-  }
-}
 
 const styles = StyleSheet.create({
   btnEscolha: {
@@ -137,7 +138,9 @@ const styles = StyleSheet.create({
   txtResultado: {
     fontSize: 25,
     fontWeight: 'bold',
-    color: 'red'
+    color: 'red',
+    paddingTop: 10,
+    paddingBottom: 10
   },
   corpo: {
     backgroundColor: '#fff', 
