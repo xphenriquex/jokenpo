@@ -100,7 +100,10 @@ export default class app3 extends Component {
         <View style={styles.palco}>
           <Text style={styles.txtResultado}>{this.state.resultado}</Text>
           <Text>Escolha do computador: {this.state.escolhaComputador} </Text>
+          <Image source={require('./imgs/tesoura.png')} />
+          
           <Text>Escolha do usuário: {this.state.escolhaUsuario}</Text>
+          <Image source={require('./imgs/tesoura.png')} />
         </View>
 
       </View>
@@ -126,7 +129,7 @@ const styles = StyleSheet.create({
   painelAcoes: {
     flexDirection:'row', 
     justifyContent: 'space-around', 
-    paddingVertical: 10 
+    paddingVertical: 10  
   },
   palco: {
     alignItems: 'center'
